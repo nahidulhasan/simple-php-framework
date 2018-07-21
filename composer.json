@@ -1,9 +1,11 @@
 {
-	"require": {
-		"symfony/http-foundation": "^3.4",
-		"symfony/routing": "^4.1"
-	},
-	"autoload": {
-		"psr-4": { "": "src/" }
-	}
+    "require": {
+        "symfony/http-foundation": "^3.3",
+        "symfony/routing": "^3.3",
+        "symfony/http-kernel": "^3.3"
+    },
+
+    "autoload": {
+        "psr-4": { "": "src/" }
+    }
 }

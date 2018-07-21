@@ -1,12 +1,16 @@
 <?php
 
+// example.com/web/front.php
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing;
+use Symfony\Component\HttpKernel;
+use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 
-function render_template($request)
+function render_template(Request $request)
 {
     extract($request->attributes->all(), EXTR_SKIP);
     ob_start();
@@ -14,6 +18,7 @@ function render_template($request)
 
     return new Response(ob_get_clean());
 }
+
 
 $request = Request::createFromGlobals();
 $routes = include __DIR__.'/../src/app.php';
