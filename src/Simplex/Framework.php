@@ -25,16 +25,14 @@ class Framework
 
     public function handle(Request $request)
     {
-        
+
         $this->matcher->getContext()->fromRequest($request);
-        
-        try { 
+
+        try {
 
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
-                  
 
             $controller = $this->controllerResolver->getController($request);
-
 
             $arguments = $this->argumentResolver->getArguments($request, $controller);
 
