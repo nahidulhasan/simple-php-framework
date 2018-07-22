@@ -12,7 +12,7 @@ Run the following command
 
 Run the PHP built-in server (php >= 7.0):
 
-`php -S 127.0.0.1:4321 -t web/ webindex.php`
+`php -S 127.0.0.1:4321 -t web/ web/index.php`
 
 Now browse the project
 
