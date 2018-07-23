@@ -20,6 +20,9 @@ function render_template(Request $request)
 }
 
 
+$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+$dotenv->load();
+
 $request = Request::createFromGlobals();
 $routes = include __DIR__.'/../src/app.php';
 

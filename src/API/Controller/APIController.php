@@ -10,13 +10,11 @@ class APIController
 {
     public function index(Request $request, $str)
     {
-       // var_dump($str); exit;
-
         $settings = array(
-            'oauth_access_token' => "164222452-hlvpCDNQgtZqjGszAdTnohnzq2Enzf1JiCW5sLlq",
-            'oauth_access_token_secret' => "25odCoYSf2D2DKFjYqaCLrO33Hj01chx7FASOPx8uXLgN",
-            'consumer_key' => "AqPfq62fwRqxhlv1OiKfv374D",
-            'consumer_secret' => "xA8oMWH3twGefixJISjhrcUdLXNJwlmteMdXVnX2NmGgb7e1K7"
+            'oauth_access_token' => getenv('OAUTH_ACCESS_TOKEN'),
+            'oauth_access_token_secret' => getenv('OAUTH_ACCESS_TOKEN_SECRET'),
+            'consumer_key' => getenv('CONSUMER_KEY'),
+            'consumer_secret' => getenv('CONSUMER_SECRET')
         );
 
 
