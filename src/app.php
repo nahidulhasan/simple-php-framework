@@ -11,9 +11,9 @@ $routes->add('leap_year', new Routing\Route('/is_leap_year/{year}', array(
     '_controller' => 'Calendar\Controller\LeapYearController::index',
 )));
 
-$routes->add('twitter_overview', new Routing\Route('/overview/{input}', array(
-    'input' => null,
-    '_controller' => 'Twitter\Controller\TwitterAPIController::index',
+$routes->add('twitter_overview', new Routing\Route('/get-info/{str}', array(
+    'str' => null,
+    '_controller' => 'API\Controller\APIController::index',
 )));
 
 

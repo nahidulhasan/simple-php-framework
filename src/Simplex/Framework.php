@@ -25,13 +25,10 @@ class Framework
 
     public function handle(Request $request)
     {
-         
         $this->matcher->getContext()->fromRequest($request);
 
-
-
         try {
-             // var_dump('test'); exit();
+
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
 
             $controller = $this->controllerResolver->getController($request);
