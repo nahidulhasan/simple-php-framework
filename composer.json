@@ -2,7 +2,8 @@
     "require": {
         "symfony/http-foundation": "^3.3",
         "symfony/routing": "^3.3",
-        "symfony/http-kernel": "^3.3"
+        "symfony/http-kernel": "^3.3",
+        "j7mbo/twitter-api-php": "^1.0"
     },
 
     "autoload": {
