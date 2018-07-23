@@ -32,7 +32,9 @@ class APIController
             ->buildOauth($url, $requestMethod)
             ->performRequest();
 
-        var_dump($response);
+        return new Response($response);
+
+        //var_dump($response); exit();
 
 
     }
