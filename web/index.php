@@ -1,6 +1,5 @@
 <?php
 
-// example.com/web/front.php
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +18,9 @@ function render_template(Request $request)
     return new Response(ob_get_clean());
 }
 
+
+$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+$dotenv->load();
 
 $request = Request::createFromGlobals();
 $routes = include __DIR__.'/../src/app.php';
