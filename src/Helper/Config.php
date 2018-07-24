@@ -2,8 +2,6 @@
 namespace Helper;
 
 
-
-
 class Config
 {
     public static  function getSettings()
@@ -19,23 +17,22 @@ class Config
 
     public  static  function getUrl()
     {
-        return $url = 'https://api.twitter.com/1.1/search/tweets.json';
+        return $url = getenv('API_URL');
+
+        //'https://api.twitter.com/1.1/search/tweets.json';
 
         //https://api.twitter.com/1.1/search/tweets.json?q=google&count=100&since_id=100
     }
 
     public  static  function getConfig($index)
     {
-        $config = ROOT_DIR.'/Config/api.php';
+        $config =require(ROOT_DIR.'/Config/api.php');
 
-
-        if(isset($config[$index])){
+        if(isset($config[$index])) {
             return $config[$index];
         } else {
             return NULL;
         }
-
     }
-
 
 }

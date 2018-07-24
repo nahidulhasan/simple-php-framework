@@ -21,21 +21,16 @@ class APIController
 
         $jsonData = $this->search($param);
 
-        $response = $this->getResult($jsonData);
+       // $response = $this->getResult($jsonData);
 
         return new Response($jsonData);
-
     }
 
     public  function search($param)
     {
-        $searchParam = "?q=#".$param.'&count=100&since_id=100';
 
-       /* $url = Config::getConfig('url');
-        $settings = Config::getConfig('settings');
-
-        var_dump($url, $settings); exit();*/
-
+        $searchParam = "?q=#".$param;
+        
         $url = Config::getUrl();
         $settings = Config::getSettings();
 
@@ -47,7 +42,27 @@ class APIController
             ->buildOauth($url, $requestMethod)
             ->performRequest();
 
-        return $jsonData;
+        $sum = json_decode($jsonData)->search_metadata->count;
+
+        while (json_decode($jsonData)->search_metadata->next_results != null){
+
+            $searchParam=json_decode($jsonData)->search_metadata->next_results;
+
+            $jsonData =  $twitter->setGetfield($searchParam)
+                ->buildOauth($url, $requestMethod)
+                ->performRequest();
+
+            $sum += json_decode($jsonData)->search_metadata->count;
+
+        }
+
+        //var_dump(json_decode($jsonData)->search_metadata->next_results);
+
+        var_dump($sum);
+
+        exit;
+
+       // return $jsonData;
     }
 
     public  function getResult($jsonData)
