@@ -30,7 +30,7 @@ class APIController
     {
 
         $searchParam = "?q=#".$param;
-        
+
         $url = Config::getUrl();
         $settings = Config::getSettings();
 
@@ -42,7 +42,9 @@ class APIController
             ->buildOauth($url, $requestMethod)
             ->performRequest();
 
-        $sum = json_decode($jsonData)->search_metadata->count;
+        $data = $jsonData;
+
+        $sum = $this->getResult($jsonData);
 
         while (json_decode($jsonData)->search_metadata->next_results != null){
 
@@ -52,17 +54,12 @@ class APIController
                 ->buildOauth($url, $requestMethod)
                 ->performRequest();
 
-            $sum += json_decode($jsonData)->search_metadata->count;
+            $sum += $this->getResult($jsonData);
 
         }
+        
 
-        //var_dump(json_decode($jsonData)->search_metadata->next_results);
-
-        var_dump($sum);
-
-        exit;
-
-       // return $jsonData;
+        return $sum;
     }
 
     public  function getResult($jsonData)
