@@ -1,5 +1,7 @@
 <?php
 
+define('ROOT_DIR', realpath(__DIR__ . '/../'));
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +21,7 @@ function render_template(Request $request)
 }
 
 
-$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+$dotenv = new Dotenv\Dotenv(ROOT_DIR);
 $dotenv->load();
 
 $request = Request::createFromGlobals();

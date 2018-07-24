@@ -4,7 +4,8 @@
         "symfony/routing": "^3.3",
         "symfony/http-kernel": "^3.3",
         "j7mbo/twitter-api-php": "^1.0",
-        "vlucas/phpdotenv": "^2.5"
+        "vlucas/phpdotenv": "^2.5",
+        "nahid/jsonq": "^5.2"
     },
 
     "autoload": {
