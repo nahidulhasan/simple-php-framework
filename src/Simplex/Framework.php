@@ -28,14 +28,12 @@ class Framework
          
         $this->matcher->getContext()->fromRequest($request);
 
-
-
         try {
-             // var_dump('test'); exit();
+             
             $request->attributes->add($this->matcher->match($request->getPathInfo()));
-
+            
             $controller = $this->controllerResolver->getController($request);
-
+            
             $arguments = $this->argumentResolver->getArguments($request, $controller);
 
             return call_user_func_array($controller, $arguments);
