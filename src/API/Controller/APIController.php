@@ -1,7 +1,6 @@
 <?php
 namespace API\Controller;
 
-
 use Helper\Config;
 use Nahid\JsonQ\Jsonq;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +18,11 @@ class APIController
             $param = "laravel";
         }
 
-        $jsonData = $this->search($param);
+        $summary = $this->search($param);
 
-       // $response = $this->getResult($jsonData);
+        $summary = json_encode(array('Search_summary' => $summary), JSON_FORCE_OBJECT);
 
-        return new Response($jsonData);
+        return new Response($summary);
     }
 
     public  function search($param)
@@ -57,9 +56,15 @@ class APIController
             $sum += $this->getResult($jsonData);
 
         }
-        
 
-        return $sum;
+        $avg = number_format($sum/7);
+
+        $result = [
+           'avg_tweet_per_day' => $avg,
+           'total_tweet_past_week' => $sum
+        ];
+        
+        return $result;
     }
 
     public  function getResult($jsonData)
