@@ -13,7 +13,7 @@ $routes->add('leap_year', new Routing\Route('/is_leap_year/{year}', array(
 
 
 $routes->add('home', new Routing\Route('/', array(
-    '_controller' => 'API\Controller\APIController::test',
+    '_controller' => 'API\Controller\APIController::dashboard',
 )));
 
 $routes->add('twitter_search', new Routing\Route('/search/{param}', array(
