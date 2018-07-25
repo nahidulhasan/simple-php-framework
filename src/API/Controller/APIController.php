@@ -16,6 +16,7 @@ class APIController
 {
 
     protected $formatter;
+    protected $response;
     protected $twitterAPIService;
 
     /**
@@ -25,6 +26,7 @@ class APIController
     {
         $this->formatter = new JsonOutputService();
         $this->twitterAPIService = new TwitterAPIService();
+        $this->response = new Response();
 
     }
 
@@ -39,12 +41,20 @@ class APIController
         $param = $request->attributes->get('param');
 
         if (empty($param)) {
-            return new Response('Parameter is missing in the request');
+
+            $this->response->setStatusCode(422);
+            $this->response->setContent('Parameter is missing in the request');
+
+            return $this->response;
+
         }
 
         $data = $this->twitterAPIService->getDataFromAPI($param);
 
-        return new Response($this->formatter->output($data));
+        $this->response->setStatusCode(200);
+        $this->response->setContent($this->formatter->output($data));
+
+        return $this->response;
     }
 
 
