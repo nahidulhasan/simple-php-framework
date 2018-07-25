@@ -4,13 +4,36 @@ namespace API\Controller;
 
 use Helper\Config;
 use Nahid\JsonQ\Jsonq;
+use Contracts\OutPutInterface;
+use Services\JsonOutputService;
+use Services\TwitterAPIService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use TwitterAPIExchange;
+
 
 
 class APIController
 {
+
+    protected $formatter;
+    protected $twitterAPIService;
+
+    /**
+     * APIController constructor.
+     */
+    public function __construct()
+    {
+        $this->formatter = new JsonOutputService();
+        $this->twitterAPIService = new TwitterAPIService();
+
+    }
+
+    /**
+     * Show formatted json data
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function index(Request $request)
     {
         $param = $request->attributes->get('param');
@@ -19,12 +42,11 @@ class APIController
             $param = "laravel";
         }
 
-        $summary = $this->getDataFromAPI($param);
+        $data = $this->twitterAPIService->getDataFromAPI($param);
 
-        $summary = json_encode(array('Search_summary' => $summary), JSON_FORCE_OBJECT);
-
-        return new Response($summary);
+        return new Response($this->formatter->output($data));
     }
+
 
     /**
      * Retrieve data from API
@@ -32,7 +54,7 @@ class APIController
      * @param $param
      * @return array
      */
-    public function getDataFromAPI($param)
+    /*public function getDataFromAPI($param)
     {
         $sum = 0;
         $searchParam = "?q=#" . $param;
@@ -50,8 +72,7 @@ class APIController
                 ->buildOauth($url, $requestMethod)
                 ->performRequest();
 
-            $sum += $this->getResult($jsonData);
-
+            $sum += $this->countTweet($jsonData);
 
             while (isset(json_decode($jsonData)->search_metadata->next_results) != null) {
 
@@ -61,8 +82,7 @@ class APIController
                     ->buildOauth($url, $requestMethod)
                     ->performRequest();
 
-                $sum += $this->getResult($jsonData);
-
+                $sum += $this->countTweet($jsonData);
             }
 
         } catch (\Exception $exception){
@@ -77,9 +97,15 @@ class APIController
         ];
 
         return $result;
-    }
+    }*/
 
-    public function getResult($jsonData)
+    /**
+     * Count Tweet from Json data
+     *
+     * @param $jsonData
+     * @return int
+     */
+    /*public function countTweet($jsonData)
     {
         $q = (new Jsonq())->json($jsonData);
         $res = $q->from('statuses')
@@ -87,16 +113,5 @@ class APIController
 
         return $res;
 
-    }
-
-    /**
-     * Show dashboard
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function dashboard(Request $request)
-    {
-        return new Response('Welcome! in the API Dashboard');
-    }
+    }*/
 }
