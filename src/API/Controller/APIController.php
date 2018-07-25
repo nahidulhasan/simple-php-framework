@@ -39,7 +39,7 @@ class APIController
         $param = $request->attributes->get('param');
 
         if (empty($param)) {
-            $param = "laravel";
+            return new Response('Parameter is missing in the request');
         }
 
         $data = $this->twitterAPIService->getDataFromAPI($param);
