@@ -2,14 +2,10 @@
 
 namespace API\Controller;
 
-use Helper\Config;
-use Nahid\JsonQ\Jsonq;
-use Contracts\OutPutInterface;
 use Services\JsonOutputService;
 use Services\TwitterAPIService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 
 
 class APIController
@@ -56,72 +52,5 @@ class APIController
 
         return $this->response;
     }
-
-
-    /**
-     * Retrieve data from API
-     *
-     * @param $param
-     * @return array
-     */
-    /*public function getDataFromAPI($param)
-    {
-        $sum = 0;
-        $searchParam = "?q=#" . $param;
-
-        $url = Config::getUrl();
-        $settings = Config::getSettings();
-
-        $requestMethod = 'GET';
-
-        try {
-
-            $twitter = new TwitterAPIExchange($settings);
-
-            $jsonData = $twitter->setGetfield($searchParam)
-                ->buildOauth($url, $requestMethod)
-                ->performRequest();
-
-            $sum += $this->countTweet($jsonData);
-
-            while (isset(json_decode($jsonData)->search_metadata->next_results) != null) {
-
-                $searchParam = json_decode($jsonData)->search_metadata->next_results;
-
-                $jsonData = $twitter->setGetfield($searchParam)
-                    ->buildOauth($url, $requestMethod)
-                    ->performRequest();
-
-                $sum += $this->countTweet($jsonData);
-            }
-
-        } catch (\Exception $exception){
-            return new Response('Something went wrong!', 500);
-        }
-
-        $avg = number_format($sum / 7);
-
-        $result = [
-            'avg_tweet_per_day' => $avg,
-            'total_tweet_past_week' => $sum
-        ];
-
-        return $result;
-    }*/
-
-    /**
-     * Count Tweet from Json data
-     *
-     * @param $jsonData
-     * @return int
-     */
-    /*public function countTweet($jsonData)
-    {
-        $q = (new Jsonq())->json($jsonData);
-        $res = $q->from('statuses')
-            ->count();
-
-        return $res;
-
-    }*/
+    
 }
