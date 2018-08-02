@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\Routing;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 class FrameworkTest extends TestCase
 {
@@ -23,7 +24,7 @@ class FrameworkTest extends TestCase
 
     private function getFrameworkForException($exception)
     {
-        $matcher = $this->createMock(Routing\Matcher\UrlMatcherInterface::class);
+        $matcher = (new UrlMatcher)($this->createMock(Routing\Matcher\UrlMatcherInterface::class));
         // use getMock() on PHPUnit 5.3 or below
         // $matcher = $this->getMock(Routing\Matcher\UrlMatcherInterface::class);
 
