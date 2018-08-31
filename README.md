@@ -1,6 +1,6 @@
 # simple-php-framework
 
-Trying to develop basic simple framework structure using php 
+Trying to develop basic framework structure using symfony component
 
 ## Installation:
 
